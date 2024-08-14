@@ -18,7 +18,7 @@ inputs:
       'Please provide github.event_name. Only push and pull_request events are
       supported.'
     required: true
-  github-event-before: # TODO can use this for pull_request detection (only available on push?)
+  github-event-before:
     description:
       'Please provide github.event.before. Required for change detection on push
       events.'
