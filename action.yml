@@ -7,6 +7,12 @@ branding:
   color: 'blue'
 
 inputs:
+  github-token: # Required for API call
+    description: 'Please provide ${{ secrets.GITHUB_TOKEN }}.'
+    required: true
+  github-repository: # Required for API call
+    description: 'Please provide ${{ github.repository }}.'
+    required: true
   github-event-name: # With this an API call can be avoided on push events
     description: 'Please provide ${{ github.event_name }}. Only push and pull_request events are supported.'
     required: true
