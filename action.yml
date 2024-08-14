@@ -3,20 +3,22 @@ description: "Find changes upon 'pull_request' or default branch 'push' events"
 author: 'anttiharju'
 
 branding:
-  icon: 'git-pull-request'
-  color: 'purple'
+  icon: 'search'
+  color: 'blue'
 
-# TBD
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  github-event-name: # With this an API call can be avoided on push events
+    description: 'Please provide ${{ github.event_name }}. Only push and pull_request events are supported.'
     required: true
-    default: '1000'
+  github-event-before:
+    description: 'Please provide ${{ github.event.before }. Required for change detection on push events.'
+  skip-depth-doubling:
+    description: 'On push events fetch depth is gradually doubled until the before sha is found. Set this to true to immediately fetch all of default branch.'
+    default: false
 
-# TBD
 outputs:
-  time:
-    description: 'Your output description here'
+  changes:
+    description: 'Files that changed upon push or within a pull request'
 
 runs:
   using: node20
