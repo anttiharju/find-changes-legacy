@@ -12,16 +12,20 @@ export async function run(): Promise<void> {
     const repository: string = core.getInput('github-repository')
     const githubToken: string = core.getInput('github-token')
     const eventName: string = core.getInput('github-event-name')
-    const beforeSha: string = core.getInput('github-event-before')
-    const skipDoubling: string = core.getInput('skip-depth-doubling')
+    //const beforeSha: string = core.getInput('github-event-before')
+    //const skipDoubling: string = core.getInput('skip-depth-doubling')
 
     core.debug(`Event name is: ${eventName}`)
-    switch (eventName) { 
-      case 'pull_request':
-        const defaultBranchName = await api.getDefaultBranch(repository, githubToken)
+    switch (eventName) {
+      case 'pull_request': {
+        const defaultBranchName = await api.getDefaultBranch(
+          repository,
+          githubToken
+        )
         const changes = await pullRequest.getChanges(defaultBranchName)
         core.setOutput('changes', await format(changes))
         break
+      }
       case 'push':
         break
       default:

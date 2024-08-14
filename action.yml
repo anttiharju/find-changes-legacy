@@ -8,18 +8,24 @@ branding:
 
 inputs:
   github-token: # Required for API call
-    description: 'Please provide ${{ secrets.GITHUB_TOKEN }}.'
+    description: 'Please provide secrets.GITHUB_TOKEN.'
     required: true
   github-repository: # Required for API call
-    description: 'Please provide ${{ github.repository }}.'
+    description: 'Please provide github.repository.'
     required: true
   github-event-name: # With this an API call can be avoided on push events
-    description: 'Please provide ${{ github.event_name }}. Only push and pull_request events are supported.'
+    description:
+      'Please provide github.event_name. Only push and pull_request events are
+      supported.'
     required: true
-  github-event-before:
-    description: 'Please provide ${{ github.event.before }. Required for change detection on push events.'
+  github-event-before: # TODO can use this for pull_request detection (only available on push?)
+    description:
+      'Please provide github.event.before. Required for change detection on push
+      events.'
   skip-depth-doubling:
-    description: 'On push events fetch depth is gradually doubled until the before sha is found. Set this to true to immediately fetch all of default branch.'
+    description:
+      'On push events fetch depth is gradually doubled until the before sha is
+      found. Set this to true to immediately fetch all of default branch.'
     default: false
 
 outputs:
