@@ -1,20 +1,19 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Find changes'
+description: "Find changes upon 'pull_request' or default branch 'push' events"
+author: 'anttiharju'
 
-# Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: 'heart'
-  color: 'red'
+  icon: 'git-pull-request'
+  color: 'purple'
 
-# Define your inputs here.
+# TBD
 inputs:
   milliseconds:
     description: 'Your input description here'
     required: true
     default: '1000'
 
-# Define your outputs here.
+# TBD
 outputs:
   time:
     description: 'Your output description here'
