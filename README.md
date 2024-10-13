@@ -50,19 +50,19 @@ need to perform some initial setup steps before you can develop your action.
 1. :hammer_and_wrench: Install the dependencies
 
    ```bash
-   npm install
+   yarn install
    ```
 
 1. :building_construction: Package the TypeScript for distribution
 
    ```bash
-   npm run bundle
+   yarn bundle
    ```
 
 1. :white_check_mark: Run the tests
 
    ```bash
-   $ npm test
+   $ yarn test
 
    PASS  ./index.test.js
      ✓ throws invalid number (3ms)
@@ -121,7 +121,7 @@ So, what are you waiting for? Go ahead and start customizing your action!
 1. Format, test, and build the action
 
    ```bash
-   npm run all
+   yarn all
    ```
 
    > This step is important! It will run [`ncc`](https://github.com/vercel/ncc)
@@ -218,7 +218,7 @@ based on release tags. This script simplifies this process by performing the
 following steps:
 
 1. **Retrieving the latest release tag:** The script starts by fetching the most
-   recent semver release tag of the current branch, by looking at the local data
+   recent SemVer release tag of the current branch, by looking at the local data
    available in your repository.
 1. **Prompting for a new release tag:** The user is then prompted to enter a new
    release tag. To assist with this, the script displays the tag retrieved in

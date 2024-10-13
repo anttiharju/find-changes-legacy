@@ -1,5 +1,7 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import * as api from './api'
+import * as pullRequest from './pullRequest'
+import { format } from './format'
 
 /**
  * The main function for the action.
@@ -7,15 +9,29 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    const repository: string = core.getInput('github-repository')
+    const githubToken: string = core.getInput('github-token')
+    const eventName: string = core.getInput('github-event-name')
+    //const beforeSha: string = core.getInput('github-event-before')
+    //const skipDoubling: string = core.getInput('skip-depth-doubling')
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    core.debug(`Event name is: ${eventName}`)
+    switch (eventName) {
+      case 'pull_request': {
+        const defaultBranchName = await api.getDefaultBranch(
+          repository,
+          githubToken
+        )
+        const changes = await pullRequest.getChanges(defaultBranchName)
+        core.setOutput('changes', await format(changes))
+        break
+      }
+      case 'push':
+        break
+      default:
+        core.error(`'${eventName}' events are not supported.`)
+        break
+    }
 
     // Set outputs for other workflow steps to use
     core.setOutput('time', new Date().toTimeString())
